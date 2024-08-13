@@ -3,6 +3,7 @@ import { Link,useNavigate } from 'react-router-dom'
 import OAuth from '../components/OAuth';
 
 
+
 export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
