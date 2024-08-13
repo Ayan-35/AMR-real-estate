@@ -10,6 +10,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
+import style from './Createlisting.module.css'
 
 
 export default function CreateListing() {
@@ -22,14 +23,14 @@ export default function CreateListing() {
     description: '',
     address: '',
     bedrooms: 1,
-    bathrooms:1,
+    bathrooms: 1,
     regularPrice: 1,
     discountPrice: 0,
-    type:'',
+    type: '',
     offer: false,
     parking: false,
     furnished: false,
-    contact:null,
+    contact: null,
   });
 
   const [imageUploadError, setImageUploadError] = useState(null);
@@ -43,7 +44,7 @@ export default function CreateListing() {
   const [loading, setLoading] = useState(false);
 
   const handleImageSubmit = (e) => {
-    if (files.length > 0 && files.length + formData.imagesURLs.length < 7  ) {
+    if (files.length > 0 && files.length + formData.imagesURLs.length < 7) {
       const promises = [];
       for (let i = 0; i < files.length; i++) {
         promises.push(storeImage(files[i]));
@@ -97,35 +98,35 @@ export default function CreateListing() {
     setFormData({
       ...formData,
       imagesURLs: formData.imagesURLs.filter((_, i) => i !== index),
-  })
+    })
   }
   
-  const handleChange = (e)=> {
+  const handleChange = (e) => {
     if (e.target.id === 'sale' || e.target.id === 'rent') {
       setFormData({
         ...formData,
-        type:e.target.id
+        type: e.target.id
       })
     }
 
     if (e.target.id === 'parking' || e.target.id === 'furnished' || e.target.id === 'offer') {
-      setFormData({...formData, [e.target.id]:e.target.checked})
+      setFormData({ ...formData, [e.target.id]: e.target.checked })
     }
 
     if (e.target.type === 'number' || e.target.type === 'textarea' || e.target.type === 'text') {
       setFormData({
         ...formData,
-        [e.target.id]:e.target.value
+        [e.target.id]: e.target.value
       })
     }
-if (
-  e.target.type === "tel"
-) {
-  setFormData({
-    ...formData,
-    [e.target.id]: e.target.value,
-  });
-}
+    if (
+      e.target.type === "tel"
+    ) {
+      setFormData({
+        ...formData,
+        [e.target.id]: e.target.value,
+      });
+    }
 
 
   }
@@ -142,7 +143,7 @@ if (
       if (+formData.regularPrice < +formData.discountPrice) {
         setError('discount price must be less than regular price');
         return;
-    }
+      }
       
       setLoading(true);
       setError(false);
@@ -153,7 +154,7 @@ if (
         },
         body: JSON.stringify({
           ...formData,
-          userRef:currentuser._id
+          userRef: currentuser._id
         }),
       });
       const data = await res.json();
@@ -171,7 +172,7 @@ if (
   
 
   return (
-    <main className="p-3 max-w-4xl mx-auto">
+    <main className={`p-3 max-w-4xl mx-auto ${style.container}`}>
       <h1 className="text-3xl font-semibold text-center my-7">
         Create a Listing
       </h1>
@@ -214,6 +215,7 @@ if (
             placeholder="Phone No."
             className="border p-3 rounded-lg"
             id="contact"
+            pattern="[0-9]{10}"
             required
             onChange={handleChange}
             value={formData.contact}
@@ -276,7 +278,6 @@ if (
                 type="number"
                 id="bedrooms"
                 min="0"
-                
                 required
                 className="p-3 border border-gray-300 rounded-lg"
                 onChange={handleChange}
@@ -301,7 +302,6 @@ if (
                 type="number"
                 id="regularPrice"
                 min="0"
-                
                 required
                 className="p-3 border border-gray-300 rounded-lg"
                 onChange={handleChange}
@@ -321,7 +321,6 @@ if (
                   type="number"
                   id="discountPrice"
                   min="0"
-                  
                   required
                   className="p-3 border border-gray-300 rounded-lg"
                   onChange={handleChange}
@@ -337,7 +336,7 @@ if (
             )}
           </div>
         </div>
-        <div className="flex flex-col flex-1 gap-4 mt-7 ">
+        <div className="flex items-center flex-col flex-1 gap-4 mt-7 ">
           <p className="font-semibold">
             Images:
             <span className="font-normal text-gray-600 ml-2">
@@ -356,7 +355,7 @@ if (
             <button
               type="button"
               onClick={handleImageSubmit}
-              className="p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80"
+              className={` ${style.upload} p-3  `}
             >
               {uploading ? "uploading..." : "upload"}
             </button>
@@ -369,7 +368,7 @@ if (
             formData.imagesURLs.map((url, index) => (
               <div
                 key={url}
-                className="flex justify-between p-3 items-center border"
+                className="flex justify-between w-80 p-3 items-center rounded border"
               >
                 <img
                   src={url}
@@ -388,7 +387,7 @@ if (
 
           <button
             disabled={loading || uploading}
-            className="p-3 bg-slate-700 rounded-lg uppercase hover:opacity-95 text-white disabled:opacity-80"
+            className={` ${style.submitButton} p-3 uppercase  `}
           >
             {loading ? "creating..." : "create listing"}
           </button>

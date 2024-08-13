@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import ListingItem from '../components/ListingItem'
+import style from "./Search.module.css";
 
 export default function Search() {
     const navigate = useNavigate();
@@ -165,7 +166,7 @@ export default function Search() {
                     <option value="createAt_asc">Oldest</option>
                 </select>
             </div>
-            <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95'>Search</button>
+            <button className= {` ${style.searchButton} p-3 rounded-lg uppercase `} >Search</button>
         </form>
       </div>
       <div className=" flex-1 ">

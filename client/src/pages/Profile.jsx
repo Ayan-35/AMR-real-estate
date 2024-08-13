@@ -8,6 +8,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
+import style from './Profile.module.css'
 
 
 import {
@@ -184,9 +185,9 @@ export default function Profile() {
 }
 
   return (
-    <div className="p-3 max-w-lg mx-auto">
+    <div className={`p-3 max-w-lg mx-auto ${style.container} `}>
       <h1 className="text-3xl font-semiblod text-center my-7 ">Profile</h1>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-4 place-items-center">
         <input
           onChange={(e) => {
             setFile(e.target.files[0]);
@@ -220,7 +221,7 @@ export default function Profile() {
         <input
           type="text"
           placeholder="username"
-          className="border p-3 rounded-lg"
+          className="border p-3 "
           defaultValue={currentuser.username}
           id="username"
           onChange={handleChange}
@@ -228,7 +229,7 @@ export default function Profile() {
         <input
           type="text"
           placeholder="email"
-          className="border p-3 rounded-lg"
+          className="border p-3 "
           defaultValue={currentuser.email}
           id="email"
           onChange={handleChange}
@@ -236,18 +237,18 @@ export default function Profile() {
         <input
           type="password"
           placeholder="password"
-          className="border p-3 rounded-lg"
+          className="border p-3 "
           id="password"
           onChange={handleChange}
         ></input>
         <button
           disabled={loading}
-          className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-80 disabled:opacity-80"
+          className={` ${style.button} p-3 uppercase `}
         >
           {loading ? "loading" : "update"}
         </button>
         <Link
-          className="bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-80"
+          className={` ${style.button} p-3 uppercase `}
           to={"/create-listing"}
         >
           Create Listing
@@ -309,15 +310,13 @@ export default function Profile() {
                   Delete
                 </button>
                 <Link to={`/update-listing/${listing._id}`}>
-                  <button
-                    className="text-green-700 uppercase">Edit</button>
+                  <button className="text-green-700 uppercase">Edit</button>
                 </Link>
               </div>
             </div>
           ))}
         </div>
       )}
-      
     </div>
   );
 }
