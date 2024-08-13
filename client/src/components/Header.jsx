@@ -36,13 +36,8 @@ export default function Header() {
       <div className="flex justify-between item-center max-w-6xl mx-auto p-3">
         <Link to="/">
           <h1 className="font-bold text-sm sm:text-xl flex-wrap">
-<<<<<<< HEAD
             <span className="text-white pr-2">AMR</span>
             <span className="text-white">Estate</span>
-=======
-            <span className="text-white">AMR</span>
-            <span className="text-slate-300">Estate</span>
->>>>>>> 419297ca27ec260de62ec9924331bf0a7bbbac69
           </h1>
         </Link>
         <form
@@ -64,20 +59,12 @@ export default function Header() {
         </form>
         <ul className="flex gap-4">
           <Link to="home">
-<<<<<<< HEAD
             <li className="hidden sm:inline text-white hover:underline">
-=======
-            <li className="hidden sm:inline text-slate-200 hover:underline">
->>>>>>> 419297ca27ec260de62ec9924331bf0a7bbbac69
               Home
             </li>
           </Link>
           <Link to="/about">
-<<<<<<< HEAD
             <li className="hidden sm:inline text-white hover:underline">
-=======
-            <li className="hidden sm:inline text-slate-200 hover:underline">
->>>>>>> 419297ca27ec260de62ec9924331bf0a7bbbac69
               About
             </li>
           </Link>
@@ -89,11 +76,7 @@ export default function Header() {
                 alt="profile"
               />
             ) : (
-<<<<<<< HEAD
               <li className=" text-white hover:underline">Sign In</li>
-=======
-              <li className=" text-slate-200 hover:underline">Sign In</li>
->>>>>>> 419297ca27ec260de62ec9924331bf0a7bbbac69
             )}
           </Link>
         </ul>
