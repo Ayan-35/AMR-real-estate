@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { MdLocationOn } from 'react-icons/md'
 import { FaIndianRupeeSign } from "react-icons/fa6";
 
-export default function ListingItem({listing}) {
+export default function ListingItem({ listing }) {
+  console.log(listing);
   
   return (
     <div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg">
@@ -37,7 +38,7 @@ export default function ListingItem({listing}) {
               {listing.bedrooms>1 ? `${listing.bedrooms} beds` : `${listing.bedrooms} bed`}
             </div>
              <div className="font-bold text-xs">
-              {listing.bathrooms>1 ? `${listing.bathroooms} baths` : `${listing.bathrooms} bath`}
+              {listing.bathrooms>1 ? `${listing.bathrooms} baths` : `${listing.bathrooms} bath`}
             </div>
             </div>
           </div>
