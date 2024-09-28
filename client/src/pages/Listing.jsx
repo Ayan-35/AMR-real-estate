@@ -131,6 +131,9 @@ export default function Listing() {
             <div className="">
               <p className="bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">contact no.{listing.contact}</p>
            </div>
+           <div className="">
+              <a href={listing.Location} target='_blank'><p className="bg-blue-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">map location</p></a>
+           </div>
           </div>
         </>
       )}

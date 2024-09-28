@@ -20,6 +20,7 @@ export default function CreateListing() {
     name: "ali",
     description: "description",
     address: "bareiily",
+    Location:'',
     bedrooms: 1,
     bathrooms: 1,
     regularPrice: 50,
@@ -223,6 +224,15 @@ export default function CreateListing() {
             required
             onChange={handleChange}
             value={formData.address}
+          />
+           <input
+            type="text"
+            placeholder="Location LINK"
+            className="border p-3 rounded-lg"
+            id="Location"
+            required
+            onChange={handleChange}
+            value={formData.Location}
           />
           <input
             type="tel"
