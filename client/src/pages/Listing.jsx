@@ -15,7 +15,9 @@ import {
   FaParking,
   FaShare,
 } from "react-icons/fa";
+
 // import Contact from "../components/Contact";
+let whatURL="";
 
 export default function Listing() {
   SwiperCore.use([Navigation]);
@@ -36,9 +38,12 @@ export default function Listing() {
         if (data.success === false) {
           setError(true);
           setLoading(false);
+         
           return;
         }
         setListing(data);
+        whatURL=` https://wa.me/${data.contact}?text= Hello I am interested in your property listed on MARG estate by name ${data.name}`
+        console.log(data)
         setLoading(false);
         setError(false);
       } catch (error) {
@@ -48,6 +53,10 @@ export default function Listing() {
     };
     fetchListing();
   },[params.listingId])
+
+
+
+
   return (
     <main>
       {loading ? (
@@ -129,11 +138,15 @@ export default function Listing() {
               </li>
             </ul>
             <div className="">
-              <p className="bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">contact no.{listing.contact}</p>
+              <a target='_blank' href={whatURL} className="bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">Chat on WhatsApp</a>
            </div>
            <div className="">
-              <a href={listing.Location} target='_blank'><p className="bg-blue-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">map location</p></a>
+              <a href={listing.Location} target='_blank'><p className="bg-blue-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">Google map location</p></a>
            </div>
+           {/* <div className="">
+             
+           <a aria-label="Chat on WhatsApp" target='_blank' href={whatURL} > <img alt="Chat on WhatsApp" src="/" /></a >
+           </div> */}
           </div>
         </>
       )}
