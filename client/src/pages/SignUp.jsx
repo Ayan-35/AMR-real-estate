@@ -3,12 +3,24 @@ import { Link,useNavigate } from 'react-router-dom'
 import OAuth from '../components/OAuth';
 import style from "./SignUp.module.css";
 
+const passwordValidationRegex = {
+  minLength: /(?=.{8,})/, // At least 8 characters
+  upperCase: /(?=.*[A-Z])/, // At least one uppercase letter
+  lowerCase: /(?=.*[a-z])/, // At least one lowercase letter
+  number: /(?=.*\d)/, // At least one number
+  specialCharacter: /(?=.*[!@#$%^&*])/ // At least one special character
+};
+
+const handleChange = (e) => {
+  setPassword(e.target.value);
+};
 
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -17,8 +29,33 @@ export default function SignUp() {
   };
   console.log(formData);
   const handleSubmit = async (e) => {
-    
+    console.log(formData.password)
+
+    if (!passwordValidationRegex.minLength.test(formData.password)) {
+      setErrorMessage('Password must be at least 8 characters long.');
+      e.preventDefault();
+  } else if (!passwordValidationRegex.upperCase.test(formData.password)) {
+      setErrorMessage('Password must contain at least one uppercase letter.');
+      e.preventDefault();
+  } else if (!passwordValidationRegex.lowerCase.test(formData.password)) {
+      setErrorMessage('Password must contain at least one lowercase letter.');
+      e.preventDefault();
+      
+  } else if (!passwordValidationRegex.number.test(formData.password)) {
+      setErrorMessage('Password must contain at least one number.');
+      e.preventDefault();
+  } else if (!passwordValidationRegex.specialCharacter.test(formData.password)) 
+  {
+      setErrorMessage('Password must contain at least one special character.');
+      e.preventDefault();
+  }
+else{
+
+
+
+
     e.preventDefault();
+    
     try {
        setLoading(true);
        const res = await fetch("/api/auth/signup", {
@@ -46,6 +83,7 @@ export default function SignUp() {
       
     }
    
+  }
   };
 
   return (
@@ -76,6 +114,8 @@ export default function SignUp() {
           id="password"
           onChange={handleChange}
         />
+
+{errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
 
         <button
           disabled={loading}

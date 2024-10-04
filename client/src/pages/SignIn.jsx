@@ -18,6 +18,7 @@ export default function SignIn() {
   console.log(formData);
   const handleSubmit = async (e) => {
     e.preventDefault();
+     
     try {
       dispatch(signInstart());
       const res = await fetch("/api/auth/signIn", {

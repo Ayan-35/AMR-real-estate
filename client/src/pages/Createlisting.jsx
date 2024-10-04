@@ -222,7 +222,7 @@ export default function CreateListing() {
           />
           <input
             type="tel"
-            placeholder="Phone No."
+            placeholder="Phone No. xxxxx xxxxx"
             className="border p-3 rounded-lg"
             id="contact"
             pattern="[0-9]{10}"
