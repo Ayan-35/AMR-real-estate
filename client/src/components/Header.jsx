@@ -36,7 +36,7 @@ export default function Header() {
       <div className="flex justify-between item-center max-w-6xl mx-auto p-3">
         <Link to="/">
           <h1 className="font-bold text-sm sm:text-xl flex-wrap">
-            <span className="text-white pr-2">AMR</span>
+            <span className="text-white pr-2">MARG</span>
             <span className="text-white">Estate</span>
           </h1>
         </Link>
@@ -63,15 +63,28 @@ export default function Header() {
               Home
             </li>
           </Link>
+
+{/* <li><select className='text-blue-700' onChange={navigate('/home')}> about
+ 
+  <option className='' >
+   
+     
+    Tour and travel
+     
+  </option>
+
+</select>
+</li> */}
+
           <Link to="/about">
             <li className="hidden sm:inline text-white hover:underline">
-              About
+              about
             </li>
           </Link>
           <Link to="/profile">
             {currentuser ? (
               <img
-                className="rounded-full h-8 w-8 object-cover"
+              className="rounded-full h-8 w-8 object-cover"
                 src={currentuser.avatar}
                 alt="profile"
               />

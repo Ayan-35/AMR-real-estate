@@ -14,9 +14,13 @@ import {
   FaMapMarkerAlt,
   FaParking,
   FaShare,
+  FaWhatsapp,
+  FaMapMarker,
 } from "react-icons/fa";
+ 
 
-// import Contact from "../components/Contact";
+
+
 let whatURL="";
 
 export default function Listing() {
@@ -27,7 +31,47 @@ export default function Listing() {
   const [error, setError] = useState(false);
    const [copied, setCopied] = useState(false);
    const [contact, setContact] = useState(false);
+   const [formData, setFormData] = useState({});
    const { currentuser } = useSelector((state) => state.user);
+
+   const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.id]: listing.listingId });
+    console.log(formData);
+    handleSubmit()
+  };
+   
+  const handleSubmit = async (e) => {
+    if (confirm("do you want to save this property")) {
+      console.log("update button is clicked");
+      e.preventDefault();
+      console.log("currentuser is", currentuser);
+      try {
+        dispatch(updateUserStart());
+        console.log(currentuser._id);
+        const res = await fetch(`/api/user/update/${currentuser._id}`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({savings:listing.listingId}),
+        });
+        const data = await res.json();
+        console.log("updated data", data);
+        if (data.success === false) {
+          dispatch(updateUserFailure(data.message));
+          return;
+        }
+        dispatch(updateUserSuccess(data));
+        setUpdateSuccess(true);
+      } catch (err) {
+        dispatch(updateUserFailure(err.message));
+      }
+    }
+  };
+
+
+
+
   useEffect(() => {
     const fetchListing = async () => {
       
@@ -65,6 +109,9 @@ export default function Listing() {
       {error ? (
         <p className="text-center my-7 text-2xl"> something went wrong!</p>
       ) : null}
+
+
+      <div className='m-3'>
       {listing && !loading && !error && (
         <>
           <Swiper navigation>
@@ -81,11 +128,7 @@ export default function Listing() {
             ))}
           </Swiper>
            
-          {copied && (
-            <p className="fixed top-[23%] right-[5%] z-10 rounded-md bg-slate-100 p-2">
-              Link copied!
-            </p>
-          )}
+          <div className='mt-2 border-2 border-black rounded'>
           <div className="flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4">
             <p className="text-2xl font-semibold">
               {listing.name} - <FaIndianRupeeSign className='inline h-5' />{" "}
@@ -137,19 +180,20 @@ export default function Listing() {
                 {listing.furnished ? "Furnished" : "Unfurnished"}
               </li>
             </ul>
-            <div className="">
-              <a target='_blank' href={whatURL} className="bg-green-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">Chat on WhatsApp</a>
+            <div className="flex gap-4">
+            <div className="bg-transparent  w-full max-w-[200px] text-white text-center p-1 rounded-md">
+              <a target='_blank' href={whatURL} className="text-green-500"><p><FaWhatsapp className="inline" /> <p className="inline">Chat on WhatsApp</p></p></a>
            </div>
-           <div className="">
-              <a href={listing.Location} target='_blank'><p className="bg-blue-900 w-full max-w-[200px] text-white text-center p-1 rounded-md">Google map location</p></a>
+           <div className="bg-transparent w-full max-w-[200px] text-white text-center p-1 rounded-md">
+              <a href={listing.Location} target='_blank' className="text-blue-500"> <p> <FaMapMarker className="inline " /><p className=" inline "> Google map location</p></p></a>
            </div>
-           {/* <div className="">
-             
-           <a aria-label="Chat on WhatsApp" target='_blank' href={whatURL} > <img alt="Chat on WhatsApp" src="/" /></a >
-           </div> */}
+           </div>
           </div>
+        </div>
         </>
       )}
+      
+      </div>
     </main>
   );
 }

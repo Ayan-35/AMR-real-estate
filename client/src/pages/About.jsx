@@ -1,8 +1,9 @@
 import React from "react";
+import style from './About.module.css'
 
 export default function About() {
   return (
-    <div className="py-20 px-4 max-w-6xl mx-auto">
+    <div className={`py-20 px-4 max-w-6xl mx-auto ${style.container}`}>
       <h1 className="text-3xl font-bold mb-4 text-slate-800">
         About MARG Estate
       </h1>
@@ -25,6 +26,10 @@ export default function About() {
         service to our clients. We believe that buying or selling a property
         should be an exciting and rewarding experience, and we are dedicated to
         making that a reality for each and every one of our clients.
+      </p>
+
+      <p className="mb-4 text-slate-700">
+         Tours and travels
       </p>
     </div>
   );

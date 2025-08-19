@@ -5,6 +5,26 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MARG Real Estate</title>
+    <style>
+      @tailwind base;
+      @tailwind components;
+      @tailwind utilities;
+  
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+  
+      .fade-in-up {
+        animation: fadeInUp 1.5s ease-out;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

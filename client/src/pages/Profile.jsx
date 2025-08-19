@@ -150,7 +150,10 @@ export default function Profile() {
     try {
       setShowLisitngError(false);
       const res = await fetch(`api/user/listings/${currentuser._id}`);
+      console.log(currentuser._id)
+      console.log(res)
       const data = await res.json()
+      console.log(data)
       if (data.success === false) {
         showListingerror(true);
         return;
@@ -274,6 +277,10 @@ export default function Profile() {
         {" "}
         {updateSuccess ? "user updated successfully" : ""}
       </p>
+
+
+{/* show listing */}
+
       <button className="text-green-700 w-full " onClick={showListing}>
         show listings
       </button>

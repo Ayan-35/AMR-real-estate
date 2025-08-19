@@ -47,28 +47,7 @@ export default function Home() {
   }, []);
   return (
     <div>
-      {/* top */}
-      <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
-        <h1 className="text-slate-700 font-bold text-3xl lg:text-6xl">
-          Find your next <span className="text-slate-500">perfect</span>
-          <br />
-          place with ease
-        </h1>
-        <div className="text-gray-400 text-xs sm:text-sm">
-          AMR Estate is the best place to find your next perfect place to
-          live.
-          <br />
-          We have a wide range of properties for you to choose from.
-        </div>
-        <Link
-          to={"/search"}
-          className="text-xs sm:text-sm text-blue-800 font-bold hover:underline"
-        >
-          Let's get started...
-        </Link>
-      </div>
-
-      {/* swiper */}
+       
       <Swiper navigation>
         {offerListings &&
           offerListings.length > 0 &&
@@ -82,14 +61,27 @@ export default function Home() {
                 className="h-[500px]"
                 key={listing._id}
               ></div>
+               <Link to={"/search"} >
+               <div className="absolute inset-0 flex flex-col items-center justify-center ">
+        <h1 className="text-black-500  font-bold text-3xl lg:text-6xl fade-in-up">
+          Explore Properties <span className="text-slate-500"></span>
+          <br />
+           Around You
+        </h1>
+        <div>
+       
+          
+       
+        </div>
+        </div>
+        </Link>
             </SwiperSlide>
           ))}
       </Swiper>
-
-      {/* listing results for offer, sale and rent */}
+ 
 
       <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10">
-        {offerListings && offerListings.length > 0 && (
+        { offerListings && offerListings.length > 0 && (
           <div className="">
             <div className="my-3">
               <h2 className="text-2xl font-semibold text-slate-600">
@@ -102,7 +94,7 @@ export default function Home() {
                 Show more offers
               </Link>
             </div>
-            <div className="flex flex-wrap gap-4">
+            <div className=" ">
               {offerListings.map((listing) => (
                 <ListingItem listing={listing} key={listing._id} />
               ))}
@@ -122,7 +114,7 @@ export default function Home() {
                 Show more places for rent
               </Link>
             </div>
-            <div className="flex flex-wrap gap-4">
+            <div className=" ">
               {rentListings.map((listing) => (
                 <ListingItem listing={listing} key={listing._id} />
               ))}
@@ -142,7 +134,7 @@ export default function Home() {
                 Show more places for sale
               </Link>
             </div>
-            <div className="flex flex-wrap gap-4">
+            <div className="  gap-4">
               {saleListings.map((listing) => (
                 <ListingItem listing={listing} key={listing._id} />
               ))}
